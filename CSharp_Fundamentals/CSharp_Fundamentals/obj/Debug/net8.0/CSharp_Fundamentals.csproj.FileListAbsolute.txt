@@ -1,0 +1,15 @@
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\bin\Debug\net8.0\CSharp_Fundamentals.exe
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\bin\Debug\net8.0\CSharp_Fundamentals.deps.json
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\bin\Debug\net8.0\CSharp_Fundamentals.runtimeconfig.json
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\bin\Debug\net8.0\CSharp_Fundamentals.dll
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\bin\Debug\net8.0\CSharp_Fundamentals.pdb
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.AssemblyInfoInputs.cache
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.AssemblyInfo.cs
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.csproj.CoreCompileInputs.cache
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.dll
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\refint\CSharp_Fundamentals.dll
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.pdb
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.genruntimeconfig.cache
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\ref\CSharp_Fundamentals.dll
+C:\Users\Yang_Kom\source\repos\CSharp_Fundamentals\CSharp_Fundamentals\obj\Debug\net8.0\CSharp_Fundamentals.sourcelink.json
