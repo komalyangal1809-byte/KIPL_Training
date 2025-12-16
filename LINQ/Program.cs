@@ -59,85 +59,94 @@ class Program
         //a.input();
 
 
-        List<Project> projects = new List<Project>()
-        {
-            new Project { ProjectId=101, ProjectName="Website" },
-            new Project { ProjectId=102, ProjectName="Mobile App" }
-        };
-        List<Department> departments = new List<Department>()
-        {
-            new Department { DeptId=1, DeptName="IT" },
-            new Department { DeptId=2, DeptName="HR" },
-            new Department { DeptId=3, DeptName="Finance" },
-            new Department { DeptId=4, DeptName="Marketing" }
-        };
-        List<Employee> employees = new List<Employee>()
-        {
-            new Employee { EmpId=1, Name="Komal", DeptId=1, Salary=50000 },
-            new Employee { EmpId=2, Name="Ankita", DeptId=2, Salary=60000 },
-            new Employee { EmpId=3, Name="Rahul", DeptId=1, Salary=55000 },
-            new Employee { EmpId=4, Name="Amit", DeptId=3, Salary=40000 },
-        };
+        //List<Project> projects = new List<Project>()
+        //{
+        //    new Project { ProjectId=101, ProjectName="Website" },
+        //    new Project { ProjectId=102, ProjectName="Mobile App" }
+        //};
+        //List<Department> departments = new List<Department>()
+        //{
+        //    new Department { DeptId=1, DeptName="IT" },
+        //    new Department { DeptId=2, DeptName="HR" },
+        //    new Department { DeptId=3, DeptName="Finance" },
+        //    new Department { DeptId=4, DeptName="Marketing" }
+        //};
+        //List<Employee> employees = new List<Employee>()
+        //{
+        //    new Employee { EmpId=1, Name="Komal", DeptId=1, Salary=50000 },
+        //    new Employee { EmpId=2, Name="Ankita", DeptId=2, Salary=60000 },
+        //    new Employee { EmpId=3, Name="Rahul", DeptId=1, Salary=55000 },
+        //    new Employee { EmpId=4, Name="Amit", DeptId=3, Salary=40000 },
+        //};
 
-        var names = from e in employees
-                    from p in projects
-                    select new { e, p };
-        foreach (var name in names)
-            Console.WriteLine(name.e.Name + "->" + name.p.ProjectName);
+        //var names = from e in employees
+        //            from p in projects
+        //            select new { e, p };
+        //foreach (var name in names)
+        //    Console.WriteLine(name.e.Name + "->" + name.p.ProjectName);
 
 
-        var res = from d in departments
-                  join e in employees
-                  on d.DeptId equals e.DeptId into dept
+        //var res = from d in departments
+        //          join e in employees
+        //          on d.DeptId equals e.DeptId into dept
          
-                  select new
-                  {
-                      DepartmentName= d.DeptName,
-                      Employee_name = dept
-                  };
+        //          select new
+        //          {
+        //              DepartmentName= d.DeptName,
+        //              Employee_name = dept
+        //          };
 
-        foreach (var name in res)
-        {
-            Console.Write(name.DepartmentName+ ":");
-            foreach (var g in name.Employee_name)
-            {
-                Console.Write(g.Name+",");
-            }
-            Console.WriteLine();
-        }
+        //foreach (var name in res)
+        //{
+        //    Console.Write(name.DepartmentName+ ":");
+        //    foreach (var g in name.Employee_name)
+        //    {
+        //        Console.Write(g.Name+",");
+        //    }
+        //    Console.WriteLine();
+        //}
 
 
-        var res1 = (from d in departments
-                    join e in employees
-                    on d.DeptId equals e.DeptId into dept
-                    select new
-                    {
-                        departname = d.DeptName,
-                        Totalsalary = dept
-                                      .Where(e=>e.Salary>=50000)
-                                      .Sum(e=>e.Salary)
-                    });
-        foreach (var name in res1)
-        {
-            Console.WriteLine(name.departname + ":"+name.Totalsalary);
+        //var res1 = (from d in departments
+        //            join e in employees
+        //            on d.DeptId equals e.DeptId into dept
+        //            select new
+        //            {
+        //                departname = d.DeptName,
+        //                Totalsalary = dept
+        //                              .Where(e=>e.Salary>=50000)
+        //                              .Sum(e=>e.Salary)
+        //            });
+        //foreach (var name in res1)
+        //{
+        //    Console.WriteLine(name.departname + ":"+name.Totalsalary);
            
-        }
+        //}
 
-        var res2 = from d in departments
-                   join e in employees
-                   on d.DeptId equals e.DeptId into dept
-                   select new
-                   {
-                       avg_salary = dept.Average(e => e.Salary),
-                       salary = dept,
-                       employee=dept
-                   };
-        foreach (var name in res2)
-        {
+        //var res2 = from d in departments
+        //           join e in employees
+        //           on d.DeptId equals e.DeptId into dept
+        //           select new
+        //           {
+        //               avg_salary = dept.Average(e => e.Salary),
+        //               salary = dept,
+        //               employee=dept
+        //           };
+        //foreach (var name in res2)
+        //{
            
-            Console.WriteLine(name.employee );
+        //    Console.WriteLine(name.employee );
 
-        }
+        //}
 
+        //FileHandling f=new FileHandling();
+        //f.input();
+        //f.output();
+        //f.writestream();
+        //f.readStream();
+
+        StudentData s=new StudentData();
+        //s.writeData();
+        s.ReadData();
     }
 }
