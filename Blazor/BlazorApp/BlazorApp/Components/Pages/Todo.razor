@@ -1,0 +1,41 @@
+﻿@using BlazorApp.Services
+
+@page "/todo"
+@inject TodoService TodoService
+@rendermode InteractiveServer
+<h3>Todo List</h3>
+
+<input @bind="newTask"  placeholder="Enter task"/>
+<button @onclick="AddTask">Add</button>
+<ul>
+    @foreach(var i in tasks)
+    {
+        <li>
+            @i
+            <button @onclick="()=>DeleteTask(i)">Delete</button>
+        </li>
+    }
+</ul>
+
+@code {
+    string newTask="";
+    List<String> tasks = new ();
+    protected override async Task OnInitializedAsync()
+    {
+        tasks = await TodoService.GetTasks();
+    }
+    async Task AddTask()
+    {
+        if(!string.IsNullOrWhiteSpace(newTask))
+        {
+            await TodoService.AddTask(newTask);
+            tasks = await TodoService.GetTasks();
+            newTask = "";
+        }
+    }
+    async Task DeleteTask(string i)
+    {
+        await TodoService.DeleteTask(i);
+        tasks = await TodoService.GetTasks();
+    }
+}
