@@ -1,0 +1,50 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using BookApp.Models
+@using BookApp.Services
+@inject BooksService Service
+
+<PageTitle>Book Management</PageTitle>
+ 
+<input @bind="b.Title" placeholder="Enter the title of the book" />
+<br />
+<br />
+<input @bind="b.Author" placeholder="Enter the author name" />
+<br />
+<br />
+<input type=number @bind="b.Price" placeholder="Enter the price of the book" step="0.01" />
+<br />
+<br />
+
+<button @onclick="AddBook">Add</button>
+
+<ul>
+    
+    @foreach(var book in books )
+    {
+        <li><b>@book.Title</b>@book.Author@book.Price</li>
+    }
+    
+</ul>
+
+@code {
+    
+    private Book b = new Book();
+    List<Book> books = new ();
+
+    protected override async Task OnInitializedAsync()
+    {
+        books = await Service.GetBooks();
+    }
+    async Task AddBook()
+    {
+        if(!string.IsNullOrWhiteSpace(b.Title))
+        {
+            await Service.AddBooks(b);
+            books = await Service.GetBooks();
+            b = new Book();
+
+        }
+    }
+
+}
