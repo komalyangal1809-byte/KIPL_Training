@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yang_Kom\\source\\repos\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj": {}
+    "C:\\Users\\komal\\Source\\Repos\\KIPL_Training\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yang_Kom\\source\\repos\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj": {
+    "C:\\Users\\komal\\Source\\Repos\\KIPL_Training\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yang_Kom\\source\\repos\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj",
+        "projectUniqueName": "C:\\Users\\komal\\Source\\Repos\\KIPL_Training\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj",
         "projectName": "MachineWebApp",
-        "projectPath": "C:\\Users\\Yang_Kom\\source\\repos\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj",
-        "packagesPath": "C:\\Users\\Yang_Kom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yang_Kom\\source\\repos\\AssetsTracking\\MachineWebApp\\obj\\",
+        "projectPath": "C:\\Users\\komal\\Source\\Repos\\KIPL_Training\\AssetsTracking\\MachineWebApp\\MachineWebApp.csproj",
+        "packagesPath": "C:\\Users\\komal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\komal\\Source\\Repos\\KIPL_Training\\AssetsTracking\\MachineWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Yang_Kom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\komal\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

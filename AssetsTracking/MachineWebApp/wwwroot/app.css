@@ -49,3 +49,56 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+.box {
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 6px;
+    margin-right: 8px;
+}
+
+button {
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.box {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    width: 220px;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: #0078D4;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #005A9E;
+    }
+
+.machine-table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-top: 20px;
+}
+
+    .machine-table th,
+    .machine-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    .machine-table th {
+        background-color: #f2f2f2;
+        text-align: left;
+    }

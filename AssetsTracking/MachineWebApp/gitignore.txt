@@ -78,6 +78,3 @@ appsettings.Local.json
 
 # Windows Image File Cache
 Thumbs.db
-.vs/
-bin/
-obj/

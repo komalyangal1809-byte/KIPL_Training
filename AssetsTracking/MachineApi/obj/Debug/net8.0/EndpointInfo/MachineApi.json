@@ -27,7 +27,7 @@
         }
       }
     },
-    "/api/assets/assets{assetName}": {
+    "/api/assets/asset/{assetName}": {
       "get": {
         "tags": [
           "Asset"
@@ -49,7 +49,7 @@
         }
       }
     },
-    "/api/assets/MachineWithLatestSeries": {
+    "/api/assets/latest": {
       "get": {
         "tags": [
           "Asset"

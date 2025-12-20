@@ -1,23 +1,33 @@
 using MachineWebApp.Components;
+using MachineWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add Razor Components
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Register HttpClient + MachinesService
+builder.Services.AddScoped<MachinesService>(sp =>
+{
+    var http = new HttpClient
+    {
+        BaseAddress = new Uri("https://localhost:7052/")
+    };
+    return new MachinesService(http);
+});
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
 

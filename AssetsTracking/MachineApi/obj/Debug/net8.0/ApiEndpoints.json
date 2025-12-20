@@ -2,7 +2,7 @@
   {
     "ContainingType": "MachineApi.Controllers.AssetController",
     "Method": "GetMachineByAsset",
-    "RelativePath": "api/assets/assets{assetName}",
+    "RelativePath": "api/assets/asset/{assetName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -13,6 +13,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MachineApi.Controllers.AssetController",
+    "Method": "GetMachinesUsingLatestSeries",
+    "RelativePath": "api/assets/latest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -29,16 +39,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MachineApi.Controllers.AssetController",
-    "Method": "GetMachinesUsingLatestSeries",
-    "RelativePath": "api/assets/MachineWithLatestSeries",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   }
 ]
