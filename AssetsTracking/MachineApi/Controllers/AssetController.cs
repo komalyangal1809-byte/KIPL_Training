@@ -14,28 +14,56 @@ namespace MachineApi.Controllers
             _service = service;
         }
 
-        // a) Get assets by machine
-        // URL: api/assets/machine/C300
+
         [HttpGet("machine/{machineName}")]
         public IActionResult GetAssetByMachine(string machineName)
         {
             return Ok(_service.GetAssetByMachine(machineName));
         }
 
-        // b) Get machines by asset
-        // URL: api/assets/asset/Shutter gripper
+
         [HttpGet("asset/{assetName}")]
         public IActionResult GetMachineByAsset(string assetName)
         {
             return Ok(_service.GetMachineByAsset(assetName));
         }
 
-        // c) Latest series machines
-        // URL: api/assets/latest
+
         [HttpGet("latest")]
         public IActionResult GetMachinesUsingLatestSeries()
         {
             return Ok(_service.GetMachineUsingLatestSeries());
         }
+
+        [HttpPost("upload")]
+        public IActionResult UploadCsvFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("File is empty");
+
+            var extension=Path.GetExtension(file.FileName).ToLower();
+            if (extension!=".csv" && extension!=".json")
+                return BadRequest("Only CSV & JSON allowed");
+
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+            //Console.WriteLine("folderpath"+folderPath);
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            var fileName = extension == ".csv" ? "Matrix.csv" : "Matrix.json";
+
+            var filePath = Path.Combine(folderPath, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            return Ok("Uploaded successfully");
+        }
+
+
+
     }
 }

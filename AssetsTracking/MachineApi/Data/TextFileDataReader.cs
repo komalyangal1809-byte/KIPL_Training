@@ -4,29 +4,26 @@ namespace MachineApi.Data
 {
     public class TextFileDataReader:IDatareader
     {
-        private readonly string _filePath;
-
-        public TextFileDataReader(string filepath)
-        {
-            _filePath = filepath;
-        }
+ 
         public List<MachineAsset> ReadData()
         {
-            var data = new List<MachineAsset>();
+           
             try
             {
-                var lines = File.ReadAllLines(_filePath);
-                
-                foreach (var line in lines)
+                var folder = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+
+                var csvPath = Path.Combine(folder, "Matrix.csv");
+                var jsonPath = Path.Combine(folder, "Matrix.json");
+
+                if(File.Exists(csvPath))
                 {
-                    var parts = line.Split(',');
-                    data.Add(new MachineAsset
-                    {
-                        MachineName = parts[0].Trim(),
-                        AssetName = parts[1].Trim(),
-                        Series = parts[2].Trim()
-                    });
-                }               
+                    return new CsvFileReader().Read(csvPath);
+                }
+                if (File.Exists(jsonPath))
+                {
+                    return new JsonFileReader().Read(jsonPath);
+                }
+               
             }
             catch(FileNotFoundException ie)
             {   
@@ -36,7 +33,8 @@ namespace MachineApi.Data
             {
                 Console.WriteLine("Exception Occurs "+ex.ToString());
             }
-            return data;
+            return new List<MachineAsset>();
+
         }
     }
 }

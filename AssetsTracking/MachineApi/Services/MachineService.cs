@@ -23,16 +23,20 @@ namespace MachineApi.Services
             }
             var asset = (from i in list
                         where i.MachineName.Equals(machineName,StringComparison.OrdinalIgnoreCase)
-                        select i.AssetName).ToList();
+                        select i.AssetName).Distinct().ToList();
             
             return asset;
         }
         public List<string> GetMachineByAsset(string assetName)
         {
-           
+            if (!list.Any())
+            {
+                return new List<string>();
+            }
+
             var machine = (from i in list
                         where i.AssetName.Equals(assetName, StringComparison.OrdinalIgnoreCase)
-                           select i.MachineName).ToList();
+                           select i.MachineName).Distinct().ToList();
 
             return machine;
         }
@@ -41,15 +45,14 @@ namespace MachineApi.Services
             if (!list.Any())
                 return new List<string>();
 
-            // 1. Find latest series for each asset
-            var latestSeriesPerAsset = list
-                .GroupBy(a => a.AssetName)
-                .ToDictionary(
-                    g => g.Key,
-                    g => g.Max(x => int.Parse(x.Series.Substring(1)))
-                );
 
-            // 2. Check machines
+                    var latestSeriesPerAsset = list
+            .GroupBy(a => a.AssetName)
+            .ToDictionary(
+                g => g.Key,
+                g => g.Max(x => int.Parse(x.Series.Replace("S", "")))
+            );
+
             var result = new List<string>();
 
             var machines = list.Select(a => a.MachineName).Distinct();
@@ -59,7 +62,7 @@ namespace MachineApi.Services
                 var machineAssets = list.Where(a => a.MachineName == machine);
 
                 bool usesAllLatest = machineAssets.All(a =>
-                    int.Parse(a.Series.Substring(1)) == latestSeriesPerAsset[a.AssetName]
+                    int.Parse(a.Series.Replace("S", "")) == latestSeriesPerAsset[a.AssetName]
                 );
 
                 if (usesAllLatest)
@@ -67,7 +70,8 @@ namespace MachineApi.Services
             }
 
             return result;
+
         }
-        
+
     }
 }

@@ -8,19 +8,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<MachineService>();
-builder.Services.AddScoped<IDatareader>(_ =>
-    new TextFileDataReader("Data/Matrix.txt"));
+builder.Services.AddScoped<IDatareader,TextFileDataReader>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowBlazor",
-        policy =>
-        {
-            policy.AllowAnyOrigin()
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-});
+
 
 var app = builder.Build();
 

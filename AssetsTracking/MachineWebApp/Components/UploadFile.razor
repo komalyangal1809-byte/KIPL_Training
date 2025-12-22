@@ -1,0 +1,69 @@
+﻿@page "/upload"
+@using Microsoft.AspNetCore.Components.Forms
+@inject HttpClient Http
+@rendermode InteractiveServer
+
+<h3>Upload CSV File</h3>
+
+<InputFile OnChange="OnFileSelected" />
+
+<br />
+<br />
+
+<button  @onclick="UploadFile1">
+    Upload
+</button>
+
+<p>@message</p>
+
+@code {
+    IBrowserFile file;
+
+    string message = "";
+
+    void OnFileSelected(InputFileChangeEventArgs e)
+    {
+        file = e.File;
+        var ext = Path.GetExtension(file.Name).ToLower();
+
+        if (ext != ".csv" && ext !=".json")
+        {
+            message = "Only CSV & json files allowed";
+
+            return;
+        }
+
+        message = "";
+
+    }
+
+    async Task UploadFile1()
+    {
+        try
+        {
+            if(file==null )
+            {
+                message = "Empty file";
+                return;
+            }
+            if(!file.Name.EndsWith(".csv") && !file.Name.EndsWith(".json"))
+            {
+                message = "Only csv & json files upload ";
+                return;
+            }
+            var content = new MultipartFormDataContent();
+            var stream = file.OpenReadStream(5_000_000);
+
+            content.Add(new StreamContent(stream), "file", file.Name);
+
+            var response = await Http.PostAsync("https://localhost:7052/api/assets/upload", content);
+
+            message = await response.Content.ReadAsStringAsync();
+        
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+}

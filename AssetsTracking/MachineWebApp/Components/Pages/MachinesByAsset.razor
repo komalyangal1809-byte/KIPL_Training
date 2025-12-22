@@ -9,6 +9,11 @@
     <button @onclick="SearchMachines">Search</button>
 </div>
 
+@if(error!=null)
+{
+    <p style="color:red">@error</p>
+}
+
 @if (machines != null)
 {
     @if (machines.Count == 0)
@@ -38,9 +43,23 @@
 @code {
     string assetName = "";
     List<string>? machines;
+    String ? error;
 
     private async Task SearchMachines()
     {
-        machines = await Service.GetMachinesByAsset(assetName);
+        error = null;
+        if(string.IsNullOrWhiteSpace(assetName))
+        {
+            error = "Please enter asset name";
+            return;
+        }
+        try
+        {
+            machines = await Service.GetMachinesByAsset(assetName);
+        }
+        catch(Exception e)
+        {
+            error = e.Message;
+        }
     }
 }

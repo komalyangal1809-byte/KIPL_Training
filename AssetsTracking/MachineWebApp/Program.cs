@@ -3,11 +3,11 @@ using MachineWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Razor Components
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Register HttpClient + MachinesService
+builder.Services.AddHttpClient();
+
 builder.Services.AddScoped<MachinesService>(sp =>
 {
     var http = new HttpClient
@@ -20,7 +20,7 @@ builder.Services.AddScoped<MachinesService>(sp =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
