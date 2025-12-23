@@ -13,7 +13,7 @@
 <button  @onclick="UploadFile1">
     Upload
 </button>
-
+<br /> <br />
 <p>@message</p>
 
 @code {
@@ -43,7 +43,7 @@
         {
             if(file==null )
             {
-                message = "Empty file";
+                message = "Please upload file";
                 return;
             }
             if(!file.Name.EndsWith(".csv") && !file.Name.EndsWith(".json"))

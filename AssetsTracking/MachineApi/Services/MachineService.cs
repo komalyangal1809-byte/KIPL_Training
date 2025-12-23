@@ -10,7 +10,8 @@ namespace MachineApi.Services
         private List<MachineAsset> list = new();
         public MachineService(IDatareader datareader) {
 
-            list = datareader.ReadData(); Console.WriteLine("Records loaded: " + list.Count);
+            list = datareader.ReadData();
+            Console.WriteLine("Records loaded: " + list.Count);
 
         }
 
@@ -21,11 +22,14 @@ namespace MachineApi.Services
             {
                 return new List<string>();
             }
-            var asset = (from i in list
-                        where i.MachineName.Equals(machineName,StringComparison.OrdinalIgnoreCase)
-                        select i.AssetName).Distinct().ToList();
-            
-            return asset;
+            var assets = list
+                         .Where(machineAsset =>
+                             machineAsset.MachineName.Equals(machineName, StringComparison.OrdinalIgnoreCase))
+                         .Select(machineAsset => machineAsset.AssetName)
+                         .Distinct()
+                         .ToList();
+
+            return assets;
         }
         public List<string> GetMachineByAsset(string assetName)
         {
@@ -34,11 +38,14 @@ namespace MachineApi.Services
                 return new List<string>();
             }
 
-            var machine = (from i in list
-                        where i.AssetName.Equals(assetName, StringComparison.OrdinalIgnoreCase)
-                           select i.MachineName).Distinct().ToList();
+            var machines = list
+                         .Where(assetRecord =>
+                             assetRecord.AssetName.Equals(assetName, StringComparison.OrdinalIgnoreCase))
+                         .Select(machineAsset => machineAsset.MachineName)
+                         .Distinct()
+                         .ToList();
 
-            return machine;
+            return machines;
         }
         public List<string> GetMachineUsingLatestSeries()
         {
@@ -46,10 +53,10 @@ namespace MachineApi.Services
                 return new List<string>();
 
 
-                    var latestSeriesPerAsset = list
-            .GroupBy(a => a.AssetName)
+             var latestSeriesPerAsset = list
+            .GroupBy(assetGroup => assetGroup.AssetName)
             .ToDictionary(
-                g => g.Key,
+                groupRecord => groupRecord.Key,
                 g => g.Max(x => int.Parse(x.Series.Replace("S", "")))
             );
 
@@ -59,7 +66,7 @@ namespace MachineApi.Services
 
             foreach (var machine in machines)
             {
-                var machineAssets = list.Where(a => a.MachineName == machine);
+                var machineAssets = list.Where(machineAsset => machineAsset.MachineName == machine);
 
                 bool usesAllLatest = machineAssets.All(a =>
                     int.Parse(a.Series.Replace("S", "")) == latestSeriesPerAsset[a.AssetName]

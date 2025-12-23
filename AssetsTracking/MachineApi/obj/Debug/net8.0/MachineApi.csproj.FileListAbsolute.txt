@@ -103,3 +103,4 @@ C:\Users\Yang_Kom\Source\Repos\KIPL_Training\AssetsTracking\MachineApi\obj\Debug
 C:\Users\Yang_Kom\Source\Repos\KIPL_Training\AssetsTracking\MachineApi\obj\Debug\net8.0\MachineApi.pdb
 C:\Users\Yang_Kom\Source\Repos\KIPL_Training\AssetsTracking\MachineApi\obj\Debug\net8.0\MachineApi.genruntimeconfig.cache
 C:\Users\Yang_Kom\Source\Repos\KIPL_Training\AssetsTracking\MachineApi\obj\Debug\net8.0\ref\MachineApi.dll
+C:\Users\Yang_Kom\Source\Repos\KIPL_Training\AssetsTracking\MachineApi\bin\Debug\net8.0\Data\Matrix.json

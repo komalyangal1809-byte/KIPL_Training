@@ -4,10 +4,8 @@ namespace MachineApi.Data
 {
     public class TextFileDataReader:IDatareader
     {
- 
         public List<MachineAsset> ReadData()
         {
-           
             try
             {
                 var folder = Path.Combine(Directory.GetCurrentDirectory(), "Data");
