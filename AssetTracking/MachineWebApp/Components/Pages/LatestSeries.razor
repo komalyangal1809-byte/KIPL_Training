@@ -1,0 +1,42 @@
+﻿@page "/latest-series"
+@inject MachineWebApp.Services.MachinesService Service
+
+
+<h2>Machines Using Latest Series</h2>
+
+@if (machines == null)
+{
+    <p>Loading...</p>
+}
+else if (!machines.Any())
+{
+    <p>No data found.</p>
+}
+else
+{
+    <table class="machine-table" border="0">
+        <thead>
+            <tr>
+                <th>Machine Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in machines)
+            {
+                <tr>
+                    <br />
+                    <td>@m</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<string> machines;
+
+    protected override async Task OnInitializedAsync()
+    {
+        machines = await Service.GetLatestSeriesMachine();
+    }
+}

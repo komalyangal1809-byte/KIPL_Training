@@ -1,0 +1,74 @@
+﻿@page "/assets-by-machine"
+@rendermode InteractiveServer
+@inject MachineWebApp.Services.MachinesService Service
+
+<h2>Assets by Machine</h2> <br /> 
+
+<div class="box">
+    <input @bind="machineName" placeholder="Enter Machine Name" />
+    <button @onclick="SearchAssets">Search</button>
+</div>
+@if (error != null)
+{
+    <p style="color:red">@error</p>
+}
+
+
+@if (assets != null)
+{
+    @if (assets.Count == 0)
+    {
+        <p>No assets found.</p>
+    }
+    else
+    {
+        <table class="machine-table">
+            <thead>
+                <tr>
+                    <th>Asset Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in assets)
+                {
+                    <tr>
+                        <td>@a</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@code {
+    
+        string machineName = string.Empty;
+        List<string> ?assets;
+        string? error;
+
+    private async Task SearchAssets()
+    {
+        error = null;
+
+        if (string.IsNullOrWhiteSpace(machineName))
+        {
+            error = "Please enter machine name";
+            return;
+        }
+
+        try
+        {
+            assets = await Service.GetAssetsByMachine(machineName.Trim());
+            StateHasChanged();   
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+
+    
+
+} 
+
+

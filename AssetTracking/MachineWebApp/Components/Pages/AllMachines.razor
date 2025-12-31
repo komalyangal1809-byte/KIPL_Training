@@ -1,0 +1,37 @@
+﻿@page "/all-machines"
+@rendermode InteractiveServer
+@inject MachineWebApp.Services.MachinesService Service
+
+<h3>All Machines</h3>
+
+@if (machines == null)
+{
+    <p>Loading machines...</p>
+}
+else
+{
+    <table class="machine-table">
+        <thead>
+            <tr>
+                <th>Machine Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in machines)
+            {
+                <tr>
+                    <td>@m</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<string>? machines;
+
+    protected override async Task OnInitializedAsync()
+    {
+        machines = await Service.GetLatestSeriesMachine();
+    }
+}

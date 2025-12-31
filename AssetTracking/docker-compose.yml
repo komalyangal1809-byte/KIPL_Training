@@ -1,0 +1,42 @@
+services:
+  web:
+    image: komalyangal18/assetstracking-web:latest
+    container_name: machine_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+    networks:
+      - machine_network
+
+  api:
+    image: komalyangal18/assetstracking-api:latest
+    container_name: machine_api
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - machine_mongo
+    networks:
+      - machine_network
+
+  machine_mongo:
+    image: mongo:6
+    container_name: machine_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - machine_network
+
+networks:
+  machine_network:
+    driver: bridge
+
+volumes:
+  mongo_data:

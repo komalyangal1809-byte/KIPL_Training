@@ -1,0 +1,91 @@
+﻿@page "/upload"
+@using Microsoft.AspNetCore.Components.Forms
+@using System.Net.Http.Headers
+@inject IHttpClientFactory HttpClientFactory
+@rendermode InteractiveServer
+
+<h3>Upload CSV / JSON File</h3>
+
+<InputFile OnChange="OnFileSelected" />
+<br />
+<br />
+<button @onclick="OnUploadFile" disabled="@isUploading">
+    @(isUploading ? "Uploading..." : "Upload")
+</button>
+<br />
+<br />
+<p class="@(isError ? "error" : "success")">@message</p>
+
+@code {
+    IBrowserFile? file;
+    string message = "";
+    bool isUploading = false;
+    bool isError = false;
+
+    void OnFileSelected(InputFileChangeEventArgs e)
+    {
+        file = e.File;
+        var ext = Path.GetExtension(file.Name).ToLower();
+        if (ext != ".csv" && ext != ".json")
+        {
+            message = "Only CSV and JSON files are allowed";
+            file = null;
+            isError = true;
+            return;
+        }
+        message = $"Selected: {file.Name}";
+        isError = false;
+    }
+
+    async Task OnUploadFile()
+    {
+        try
+        {
+            if (file == null)
+            {
+                message = "Please select a file";
+                isError = true;
+                return;
+            }
+
+            isUploading = true;
+            isError = false;
+            message = "Uploading...";
+
+            var httpClient = HttpClientFactory.CreateClient("ApiClient");
+
+            var content = new MultipartFormDataContent();
+            var stream = file.OpenReadStream(5_000_000); // 5MB max
+            var streamContent = new StreamContent(stream);
+            streamContent.Headers.ContentType =
+                new MediaTypeHeaderValue(file.ContentType);
+            content.Add(streamContent, "file", file.Name);
+
+            // Relative URL - will use BaseAddress from configuration
+            var response = await httpClient.PostAsync(
+                "api/assets/upload",
+                content
+            );
+
+            if (response.IsSuccessStatusCode)
+            {
+                message = await response.Content.ReadAsStringAsync();
+                isError = false;
+            }
+            else
+            {
+                message = $"Upload failed: {response.StatusCode}";
+                isError = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            message = $"Error: {ex.Message}";
+            isError = true;
+        }
+        finally
+        {
+            isUploading = false;
+        }
+    }
+}
