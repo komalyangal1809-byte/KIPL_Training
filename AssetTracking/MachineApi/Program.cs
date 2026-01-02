@@ -1,5 +1,6 @@
 using MachineApi.Data;
 using MachineApi.Services;
+using MachineApi.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +8,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<MachineService>();
-builder.Services.AddScoped<IDatareader,TextFileDataReader>();
+builder.Services.AddSingleton<MongoDbContext>();
 
+
+builder.Services.AddScoped<IDatareader,MongoDataReader>();
+builder.Services.AddScoped<DataImportService>();
+builder.Services.AddScoped<MachineService>();
 
 
 var app = builder.Build();

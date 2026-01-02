@@ -55,8 +55,11 @@
             var httpClient = HttpClientFactory.CreateClient("ApiClient");
 
             var content = new MultipartFormDataContent();
-            var stream = file.OpenReadStream(5_000_000); // 5MB max
+
+            var stream = file.OpenReadStream(5_000_000); 
+
             var streamContent = new StreamContent(stream);
+
             streamContent.Headers.ContentType =
                 new MediaTypeHeaderValue(file.ContentType);
             content.Add(streamContent, "file", file.Name);

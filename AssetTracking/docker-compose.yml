@@ -1,6 +1,7 @@
 services:
   web:
-    image: komalyangal18/assetstracking-web:latest
+    build:
+     context : ./MachineWebApp
     container_name: machine_app
     ports:
       - "8080:8080"
@@ -10,25 +11,31 @@ services:
       - machine_network
 
   api:
-    image: komalyangal18/assetstracking-api:latest
+    build: 
+     context: ./MachineApi
     container_name: machine_api
     ports:
       - "5000:5000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - MONGO_CONNECTION=mongodb://machine_mongo:27017
     depends_on:
-      - machine_mongo
+      - mongo
     networks:
       - machine_network
 
-  machine_mongo:
+  mongo:
     image: mongo:6
-    container_name: machine_mongo
+    container_name: mongo
     ports:
       - "27017:27017"
+
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin123
+      - MONGO_CONNECTION=mongodb://machine_mongo:27017
+
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: 
+    #   MONGO_INITDB_ROOT_PASSWORD:
     volumes:
       - mongo_data:/data/db
     networks:

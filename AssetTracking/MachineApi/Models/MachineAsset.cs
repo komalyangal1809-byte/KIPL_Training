@@ -2,6 +2,7 @@
 {
     public class MachineAsset
     {
+        public string Id { get; set; }=Guid.NewGuid().ToString();
         public string MachineName { get; set; }
         public string AssetName { get; set; }
         public string Series { get; set; }

@@ -9,9 +9,11 @@ namespace MachineApi.Controllers
     {
         private readonly MachineService _service;
 
-        public AssetController(MachineService service)
+
+        public AssetController(MachineService service )
         {
             _service = service;
+           
         }
 
 
@@ -42,11 +44,12 @@ namespace MachineApi.Controllers
                 return BadRequest("File is empty");
 
             var extension=Path.GetExtension(file.FileName).ToLower();
+
+
             if (extension!=".csv" && extension!=".json")
                 return BadRequest("Only CSV & JSON allowed");
 
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
-            //Console.WriteLine("folderpath"+folderPath);
 
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
@@ -59,10 +62,17 @@ namespace MachineApi.Controllers
             {
                 file.CopyTo(stream);
             }
+            _service.uplaodFile(filePath);
+            return Ok();
 
-            return Ok("Uploaded successfully");
         }
 
+        [HttpGet("GetALlMachines")]
+        public IActionResult GetAll()
+        {
+            var data = _service.GetAllMachines();
+            return Ok(data);
+        }
 
 
     }
